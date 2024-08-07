@@ -1,0 +1,42 @@
+let drawing = false;
+let colorPicker;
+let weightSlider;
+let clearButton;
+
+function setup() {
+  createCanvas(600, 400);
+  background(255); // Define o fundo branco
+  
+  // Cria o seletor de cor
+  colorPicker = createColorPicker('#000000');
+  colorPicker.position(10, height + 10);
+  
+  // Cria o controle deslizante para a espessura da linha
+  weightSlider = createSlider(1, 10, 4);
+  weightSlider.position(150, height + 10);
+  
+  // Cria o botão para limpar a tela
+  clearButton = createButton('Limpar Tela');
+  clearButton.position(300, height + 10);
+  clearButton.mousePressed(clearCanvas);
+}
+
+function draw() {
+  if (drawing) {
+    stroke(colorPicker.color()); // Define a cor da linha
+    strokeWeight(weightSlider.value()); // Define a espessura da linha
+    line(pmouseX, pmouseY, mouseX, mouseY);
+  }
+}
+
+function mousePressed() {
+  drawing = true;
+}
+
+function mouseReleased() {
+  drawing = false;
+}
+
+function clearCanvas() {
+  background(255); // Limpa a tela com fundo branco
+}
